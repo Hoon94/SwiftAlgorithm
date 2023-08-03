@@ -6,12 +6,5 @@
 //
 
 func solution(_ sides:[Int]) -> Int {
-    let max = sides.max()
-    var another = sides.reduce(0) {$0 + $1} - max!
-
-    if another > max! {
-        return 1
-    }
-
-    return 2
+    return sides.sorted()[0] + sides.sorted()[1] > sides.sorted()[2] ? 1 : 2
 }
