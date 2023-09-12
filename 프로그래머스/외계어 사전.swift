@@ -6,21 +6,5 @@
 //
 
 func solution(_ spell:[String], _ dic:[String]) -> Int {
-     var list: Set<String> = []
-     var result: Int = 0
-    
-     for word in dic {
-         for chr in spell {
-             if word.contains(chr) && list.insert(chr).0 {
-                 if spell.count == list.count {
-                     return 1
-                 }
-             } else {
-                 list.removeAll()
-                 break
-             }
-         }
-     }
-    
-     return 2
+    return dic.map { String($0.sorted()) }.contains(spell.sorted().joined()) ? 1 : 2
 }
