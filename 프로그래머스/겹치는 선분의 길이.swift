@@ -6,14 +6,15 @@
 //
 
 func solution(_ lines:[[Int]]) -> Int {
-    var a: Set<Int> = Set(lines[0][0]...lines[0][1])
-    var b: Set<Int> = Set(lines[1][0]...lines[1][1])
-    var c: Set<Int> = Set(lines[2][0]...lines[2][1])
+    var wholeLine = Array(repeating: 0, count: 200)
     
-    var v:Int = a.intersection(b).count > 1 ? a.intersection(b).count - 1 : 0
-    var x:Int = b.intersection(c).count > 1 ? b.intersection(c).count - 1 : 0
-    var y:Int = a.intersection(c).count > 1 ? a.intersection(c).count - 1 : 0
-    var z:Int = a.intersection(b).intersection(c).count > 1 ? a.intersection(b).intersection(c).count - 1 : 0
-    
-    return v + x + y - 2 * z
+    for line in lines {
+        let line = line.sorted()
+        
+        for idx in stride(from: line.first!, to: line.last!, by: 1) {
+            wholeLine[idx + 100] += 1
+        }
+    }
+
+    return wholeLine.filter { $0 >= 2 }.count
 }
