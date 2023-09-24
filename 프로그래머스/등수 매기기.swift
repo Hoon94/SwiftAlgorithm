@@ -6,26 +6,12 @@
 //
 
 func solution(_ score:[[Int]]) -> [Int] {
-    var rankList: [Double: Int] = [:]
-    var result: [Int] = []
-    var rank: Int = 0
-    var same: Int = 0
-    var temp: Double = -1
+    var answer: [Int] = []
+    let total = score.map { $0.reduce(0, +) }
     
-    for i in score.map({ Double($0.reduce(0, +)) / 2 }).sorted(by: >) {
-        if i == temp {
-            same += 1
-        } else {
-            rank += 1 + same
-            rankList[i] = rank
-            same = 0
-            temp = i
-        }
+    for tmp in total {
+        answer.append(total.filter { $0 > tmp }.count + 1)
     }
-        
-    for i in score {
-        result.append(rankList[Double(i[0] + i[1]) / 2]!)
-    }
-    
-    return result
+
+    return answer
 }
