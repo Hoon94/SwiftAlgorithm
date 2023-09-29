@@ -6,13 +6,5 @@
 //
 
 func solution(_ id_pw:[String], _ db:[[String]]) -> String {
-    if !db.filter { $0 == id_pw }.isEmpty {
-        return "login"
-    } else if !db.filter { $0[0] == id_pw[0] }.isEmpty {
-        return "wrong pw"
-    } else {
-        return "fail"
-    }
-    
-    return ""
+    return db.contains(id_pw) ? "login" : db.map { $0[0] }.contains(id_pw[0]) ? "wrong pw" : "fail"
 }
