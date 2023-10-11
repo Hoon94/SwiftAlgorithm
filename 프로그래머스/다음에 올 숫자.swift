@@ -6,11 +6,7 @@
 //
 
 func solution(_ common:[Int]) -> Int {
-    if common[2] - common[1] == common[1] - common[0] {
-        return common.last! + common[2] - common[1]
-    } else if common[2] * common[0] == common[1] * common[1] {
-        return common.last! * (common[1] / common[0])
-    }
-    
-    return 0
+    return common.last! == common.first! + (common[1] - common[0]) * (common.count - 1)
+    ? common.last! + common[1] - common[0]
+    : Int(Double(common.last!) * (Double(common[1]) / Double(common[0])))
 }
