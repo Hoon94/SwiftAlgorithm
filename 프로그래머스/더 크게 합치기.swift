@@ -6,7 +6,5 @@
 //
 
 func solution(_ a:Int, _ b:Int) -> Int {
-    let answer = String(a) + String(b) >= String(b) + String(a) ? String(a) + String(b) : String(b) + String(a)
-    
-    return Int(answer)!
+    return max(Int("\(a)\(b)")!, Int("\(b)\(a)")!)
 }
