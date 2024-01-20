@@ -6,25 +6,18 @@
 //
 
 func solution(_ answers:[Int]) -> [Int] {
-    let a = [1, 2, 3, 4, 5]
-    let b = [2, 1, 2, 3, 2, 4, 2, 5]
-    let c = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
-    var result = [0, 0, 0]
-    var answer = [Int]()
-    
-    for i in 0..<answers.count {
-        result[0] += answers[i] == a[i % 5] ? 1 : 0
-        result[1] += answers[i] == b[i % 8] ? 1 : 0
-        result[2] += answers[i] == c[i % 10] ? 1 : 0
+    let answer = (
+        a: [1, 2, 3, 4, 5],
+        b: [2, 1, 2, 3, 2, 4, 2, 5],
+        c: [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+    )
+    var point = [1 : 0, 2 : 0, 3 : 0]
+
+    for (i, v) in answers.enumerated() {
+        if v == answer.a[i % 5] { point[1] = point[1]! + 1 }
+        if v == answer.b[i % 8] { point[2] = point[2]! + 1 }
+        if v == answer.c[i % 10] { point[3] = point[3]! + 1 }
     }
-    
-    let max = result.max()
-    
-    for i in 0...2{
-        if max == result[i]{
-            answer.append(i + 1)
-        }
-    }
-    
-    return answer
+
+    return point.sorted { $0.key < $1.key }.filter { $0.value == point.values.max() }.map { $0.key }
 }
